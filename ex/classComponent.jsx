@@ -1,20 +1,24 @@
 
 import React, { Component } from 'react'
 
+import ButtonComponent from './buttonComponent'
+
 export default class ClassComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: props.initialValue,
-    }
+    };
+    this.increment = this.increment.bind(this);
+    this.decrement = this.decrement.bind(this);
   }
   
-  sum(delta) {
-    /*
-    for state with more than one key/value pair
-    this.setState({ ...this.state, value: this.state.value + delta});
-    */
-    this.setState({value: this.state.value + delta});
+  increment() {
+    this.setState({value: this.state.value + 1});
+  }
+
+  decrement() {
+    this.setState({value: this.state.value - 1});
   }
   
   render() {
@@ -22,8 +26,8 @@ export default class ClassComponent extends Component {
       <div>
         <h1>{ this.props.label }</h1>
         <h2>{ this.state.value }</h2>
-        <button onClick={() => this.sum(1)}>Increment</button>
-        <button onClick={() => this.sum(-1)}>Decrement</button>
+        <ButtonComponent buttonName='Increment'  action={this.increment} />
+        <ButtonComponent buttonName='Decrement'  action={this.decrement} />
       </div>
     )
   }
